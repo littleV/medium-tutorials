@@ -1,0 +1,31 @@
+<head>
+    <title>Local Cache Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>localStorage.setItem("failedToCache","Faild to cache.")</script>
+</head>
+<body>
+    <div class="container">
+        <div id="demo" style="text-align:center"></div>
+        <script type="text/javascript">
+            function unescapeHTML(inputString) {
+                inputString = inputString.replace("&quot;", "\"");
+                inputString = inputString.replace("&amp;", "&");
+                inputString = inputString.replace("&lt;", "<");
+                inputString = inputString.replace("&gt;", ">");
+                return inputString;
+            }
+            var urlParams = new URLSearchParams(window.location.search);
+            var key = urlParams.get('q');
+            if(localStorage.getItem(key) === null) {
+                document.getElementById('demo').innerHTML = "No cache found.";
+            } else {
+                var content = localStorage.getItem(key);
+                content = unescapeHTML(content);
+                document.getElementById('demo').innerHTML = content;
+            }
+        </script>
+    </div>
+</body>
