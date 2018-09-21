@@ -1,0 +1,21 @@
+<head>
+    <title>Local Cache Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="demo" style="text-align:center"></div>
+        <script type="text/javascript">
+            var urlParams = new URLSearchParams(window.location.search);
+            var key = urlParams.get('q');
+            if(localStorage.getItem(key) === null) {
+                document.getElementById('demo').innerHTML = "No cache found.";
+            } else {
+                document.getElementById('demo').innerHTML = localStorage.getItem(key);
+            }
+        </script>
+    </div>
+</body>
