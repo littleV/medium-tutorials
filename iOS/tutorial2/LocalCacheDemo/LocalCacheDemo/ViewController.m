@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <WebKit/WebKit.h>
+#import "Cache.h"
 
 @interface ViewController () <UITextViewDelegate>
 @property UIView *webviewHolder;
@@ -66,11 +67,20 @@
 {
     NSString *contentToCache = self.input.text;
     if (![@"Tap to edit" isEqualToString:contentToCache]) {
-        
+        NSArray *contents = @[contentToCache];
+        NSURLRequest *request = [self getRequestWithQueryString:@"test"];
+        [[Cache globalCache] cacheContents:contents forHost:request.URL.absoluteString withCompletionBlock:^(NSError *error, NSArray *cacheIds) {
+            if (error) {
+                self.cacheId = @"failedToCache";
+            } else {
+                self.cacheId = cacheIds[0];
+            }
+            [self controlSwitch:self.webviewSwitch];
+        }];
     } else {
         self.cacheId = @"haha";
+        [self controlSwitch:self.webviewSwitch];
     }
-    [self controlSwitch:self.webviewSwitch];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -105,7 +115,6 @@
     for(UIView *sub in self.webviewHolder.subviews) {
         [sub removeFromSuperview];
     }
-    NSLog(@"Loading from WkWebview");
     WKWebView *content = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 300)];
     [self.webviewHolder addSubview:content];
     [content loadRequest:[self getRequestWithQueryString: self.cacheId]];
@@ -116,7 +125,6 @@
     for(UIView *sub in self.webviewHolder.subviews) {
         [sub removeFromSuperview];
     }
-    NSLog(@"Loading from UIWebview");
     UIWebView *content = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 300)];
     [self.webviewHolder addSubview:content];
     [content loadRequest:[self getRequestWithQueryString: self.cacheId]];
