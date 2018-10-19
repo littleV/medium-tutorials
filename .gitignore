@@ -1,3 +1,7 @@
+# python
+.pyc
+env
+
 # System
 .DS_Store
 
