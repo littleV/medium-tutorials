@@ -81,3 +81,10 @@ yarn-error.log
 .expo 
 .vscode
 .watchmanconfig
+
+# Android Studio
+.idea
+.gradle
+
+# Project specific
+*/FancyLibs/products/
