@@ -1,0 +1,19 @@
+{
+    "name": "FancyLibs",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "build-android": "react-native bundle --platform android --dev false --entry-file js/index.js --bundle-output android/fancylib/src/main/assets/unifiedsdk.bundle --assets-dest android/fancylib/src/main/res",
+        "build-ios": "react-native bundle --platform ios --dev false --entry-file js/index.js --bundle-output ios/FancyLib/FancyLib/js/unifiedsdk.bundle --assets-dest ios/FancyLib/FancyLib/assets/"
+     
+    },
+    "dependencies": {
+        "react": "^16.6.3",
+        "react-native": "^0.57.8"
+    },
+    "devDependencies": {
+        "babel-loader": "7.1.4",
+        "babel-plugin-transform-runtime": "6.23.0",
+        "metro-react-native-babel-preset": "^0.45.0"
+    }
+}
